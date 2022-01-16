@@ -17,3 +17,14 @@ pub struct LogLine {
     pub msg: Option<String>,
 
 }
+
+#[cfg(test)]
+#[test]
+pub fn test_simple() {
+    let line:LogLine = serde_json::from_str(r#"{"level":30,"time":1642090836068,"pid":10,"hostname":"a94a64688df8","msg":"App was instantiated"}"#).unwrap();
+    assert_eq!(line.time.to_string(), "2022-01-13 16:20:36.068 UTC");
+    assert_eq!(line.pid, 10);
+    assert_eq!(line.hostname, "a94a64688df8");
+    assert_eq!(line.msg.unwrap(), "App was instantiated");
+
+}
